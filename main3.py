@@ -110,42 +110,41 @@ if __name__=='__main__':
             #网易云6点更新推荐 8点后处理避免将昨天的歌单放到今天的歌单里
         #    print('不到8点，不处理')
         #    exit(0)
-        list_name = 'Exotic'
-        print('歌单名 list_name=%s' % list_name)
         user_music_list = cm.getUserMusicList(uid)
-        if list_name in user_music_list:
-            print('已有歌单：%s' % list_name)
-            list_id = user_music_list[list_name]
-        else:
-            print('创建歌单：%s' % list_name)
-            list_id = cm.createMusicList(list_name)
-        print('歌单id list_id=%s' % list_id)
-        print('获取源歌单歌曲：')
-        src_list_id = ""
-        for list_name in user_music_list:
-            if '宝藏系女孩' in list_name:
-                src_list_id = user_music_list[list_name]
-                print('找到源歌单：%s' % str((src_list_id,list_name)) )
-                break
-        if not src_list_id:
-            print('无法找到源歌单：%s' % str((user_music_list)) )
-            exit(1)
-        #day_music_ids = cm.getDaySend()
-        src_list_music_ids = cm.getMusicListDetail(src_list_id)
-        list_music_ids = cm.getMusicListDetail(list_id)
-        print(src_list_music_ids)
-        will_add_list = []
-        for music_id in src_list_music_ids:
-            if music_id in list_music_ids:
-                pass
+        SYNC_LIST = {'宝藏系女孩':'Exotic'}
+        for src_list_keyword,dst_list_name in SYNC_LIST.items():
+            src_list_id = ""
+            for list_name in user_music_list:
+                if src_list_keyword in list_name:
+                    src_list_id = user_music_list[list_name]
+                    print('找到源歌单：%s' % str((src_list_id,list_name)) )
+                    break
+            if not src_list_id:
+                print('无法找到源歌单：%s' % str((src_list_keyword,user_music_list)) )
+                continue
+            if dst_list_name in user_music_list:
+                print('已有目标歌单：%s' % dst_list_name)
+                dst_list_id = user_music_list[dst_list_name]
             else:
-                will_add_list.append(music_id)
-        if len(will_add_list) > 0:
-            music_ids = ','.join(will_add_list)
-            res = cm.addMusicToList(list_id, music_ids)
-            if res:
-                print('添加列表：%s【成功】' % (music_ids))
-            else:
-                print('添加列表：%s【失败】' % (music_ids))
+                print('创建目标歌单：%s' % dst_list_name)
+                dst_list_id = cm.createMusicList(dst_list_name)
+            print('目标歌单id list_id=%s' % dst_list_id)
+            #day_music_ids = cm.getDaySend()
+            src_list_music_ids = cm.getMusicListDetail(src_list_id)
+            dst_list_music_ids = cm.getMusicListDetail(dst_list_id)
+            print(src_list_music_ids)
+            will_add_list = []
+            for music_id in src_list_music_ids:
+                if music_id in dst_list_music_ids:
+                    pass
+                else:
+                    will_add_list.append(music_id)
+            if len(will_add_list) > 0:
+                music_ids = ','.join(will_add_list)
+                res = cm.addMusicToList(dst_list_id, music_ids)
+                if res:
+                    print('添加列表：%s【成功】' % (music_ids))
+                else:
+                    print('添加列表：%s【失败】' % (music_ids))
     except:
         print('error')
