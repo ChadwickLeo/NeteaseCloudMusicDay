@@ -123,16 +123,15 @@ if __name__=='__main__':
                 print('无法找到源歌单：%s' % str((src_list_keyword,user_music_list)) )
                 continue
             if dst_list_name in user_music_list:
-                print('已有目标歌单：%s' % dst_list_name)
                 dst_list_id = user_music_list[dst_list_name]
+                print('已有目标歌单：%s' % str((dst_list_id,dst_list_name)))
             else:
-                print('创建目标歌单：%s' % dst_list_name)
                 dst_list_id = cm.createMusicList(dst_list_name)
-            print('目标歌单id list_id=%s' % dst_list_id)
+                print('创建目标歌单：%s' % str((dst_list_id,dst_list_name)))
             #day_music_ids = cm.getDaySend()
             src_list_music_ids = cm.getMusicListDetail(src_list_id)
             dst_list_music_ids = cm.getMusicListDetail(dst_list_id)
-            print(src_list_music_ids)
+            print('源歌单：%s' % str(src_list_music_ids))
             will_add_list = []
             for music_id in src_list_music_ids:
                 if music_id in dst_list_music_ids:
@@ -143,8 +142,8 @@ if __name__=='__main__':
                 music_ids = ','.join(will_add_list)
                 res = cm.addMusicToList(dst_list_id, music_ids)
                 if res:
-                    print('添加列表：%s【成功】' % (music_ids))
+                    print('添加歌曲列表：%s【成功】' % (music_ids))
                 else:
-                    print('添加列表：%s【失败】' % (music_ids))
+                    print('添加歌曲列表：%s【失败】' % (music_ids))
     except:
         print('error')
