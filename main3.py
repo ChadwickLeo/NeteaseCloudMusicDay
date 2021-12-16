@@ -111,7 +111,7 @@ if __name__=='__main__':
         #    print('不到8点，不处理')
         #    exit(0)
         user_music_list = cm.getUserMusicList(uid)
-        SYNC_LIST = {'宝藏系女孩':'Exotic','[东方禅意]':'Chinese Folk','[青春点唱机]':'80s','[旧日金曲漫步]':'90s','[法语浪漫订制]':'French','[一周韩语上新]':'Korean'}
+        SYNC_LIST = {'宝藏系女孩':'Exotic','[东方禅意]':'Chinese Folk','[青春点唱机]':'80s','[旧日金曲漫步]':'90s','[爱的巴萨诺瓦]':'Bossa Nova','[今夜晚点睡]':'Romance','[法语浪漫订制]':'French','[一周韩语上新]':'Korean','日本流行精选':'Japanese'}
         for src_list_keyword,dst_list_name in SYNC_LIST.items():
             src_list_id = ""
             for list_name in user_music_list:
