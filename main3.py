@@ -140,7 +140,7 @@ if __name__=='__main__':
                   '[亲子早教儿歌]':'Children Early Education', 
                   '[儿童诗词吟唱]':'Children Poems', 
                   '[亲子欢乐儿歌]':'Children Games'}
-         # 虚位以待 磁性男声
+         # 虚位以待 深厚磁性男声
         for src_list_keyword,dst_list_name in SYNC_LIST.items():
             src_list_id = ""
             for list_name in user_music_list:
