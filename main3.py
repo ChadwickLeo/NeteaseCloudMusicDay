@@ -146,10 +146,10 @@ if __name__=='__main__':
             for list_name in user_music_list:
                 if src_list_keyword in list_name:
                     src_list_id = user_music_list[list_name]
-                    print('━━▶找到源歌单：%s' % str((src_list_id,list_name)) )
+                    print('【找到源歌单】%s' % str((src_list_id,list_name)) )
                     break
             if not src_list_id:
-                print('━━▶无法找到源歌单：%s' % str((src_list_keyword,user_music_list)) )
+                print('【无法找到源歌单】%s' % str((src_list_keyword,user_music_list)) )
                 continue
             src_list_music_ids = cm.getMusicListDetail(src_list_id)
             print('源歌单内容：%s' % str(src_list_music_ids))
@@ -171,8 +171,8 @@ if __name__=='__main__':
                 music_ids = ','.join(will_add_list)
                 res = cm.addMusicToList(dst_list_id, music_ids)
                 if res:
-                    print('◀━━添加歌曲列表【成功】：%s' % (music_ids))
+                    print(f'━━▶添加歌曲列表【成功{str(len(will_add_list))}】：{music_ids}')
                 else:
-                    print('◀━━添加歌曲列表【失败】：%s' % (music_ids))
+                    print(f'━━▶添加歌曲列表【失败{str(len(will_add_list))}】：{music_ids}')
     except:
         print('error')
