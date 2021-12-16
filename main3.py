@@ -111,7 +111,36 @@ if __name__=='__main__':
         #    print('不到8点，不处理')
         #    exit(0)
         user_music_list = cm.getUserMusicList(uid)
-        SYNC_LIST = {'[宝藏系女孩]':'Exotic','[东方禅意]':'Chinese Folk','[青春点唱机]':'80s','[旧日金曲漫步]':'90s','[爱的巴萨诺瓦]':'Bossa Nova','[今夜晚点睡]':'Romance','[法语浪漫订制]':'French','[一周韩语上新]':'Korean','日本流行精选':'Japanese'}
+        SYNC_LIST = {'[宝藏系女孩]':'Exotic', 
+                  '[宝藏系男孩]':'Exotic Male', 
+                  '[东方禅意]':'Chinese Folk', 
+                  '[青春点唱机]':'80s', 
+                  '[旧日金曲漫步]':'90s', 
+                  '[牛奶泡泡浴]':'Chill', 
+                  '[爱的巴萨诺瓦]':'Bossa Nova', 
+                  '[今夜晚点睡]':'Romance', 
+                  '[浪漫婚礼专用]':'Sweet Love', 
+                  '[阅读好时光]':'Reading', 
+                  '[聚精会神]':'Concertration',
+                  '[运动随身听]':'Sports',  
+                  '[大自然纯音]':'Nature', 
+                  '[古典歌剧典藏]':'Opera', 
+                  '[开启学霸模式]':'Western Classical', 
+                  '[放刺一周电音]':'Electronic', 
+                  '[电音小情歌]':'Electronic Love', 
+                  '[公路之歌]':'Roadtrip', 
+                  '[放克复古派对]':'Funk', 
+                  '[法语浪漫订制]':'French', 
+                  '[一周韩语上新]':'Korean', 
+                  '[韩系小甜歌]':'Korean Sweet', 
+                  '日本流行精选':'Japanese', 
+                  '[儿童趣味百科]':'Children Wiki', 
+                  '[亲子玩耍时光]':'Children Joy', 
+                  '[宝贝安全教育]':'Children Safety', 
+                  '[亲子早教儿歌]':'Children Early Education', 
+                  '[儿童诗词吟唱]':'Children Poems', 
+                  '[亲子欢乐儿歌]':'Children Games'}
+         # 虚位以待 磁性男声
         for src_list_keyword,dst_list_name in SYNC_LIST.items():
             src_list_id = ""
             for list_name in user_music_list:
