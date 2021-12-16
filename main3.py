@@ -175,6 +175,6 @@ if __name__=='__main__':
                 if res:
                     print(f'━━▶添加歌曲列表成功【{str(len(will_add_list))}】：{music_ids}')
                 else:
-                    print(f'━━▶添加歌曲列表失败【{str(len(will_add_list))}】：{music_ids}')
+                    print(f'◀━━添加歌曲列表失败【{str(len(will_add_list))}】：{music_ids}')
     except:
         print('error')
