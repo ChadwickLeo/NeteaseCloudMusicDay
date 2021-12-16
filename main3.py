@@ -151,6 +151,8 @@ if __name__=='__main__':
             if not src_list_id:
                 print('━━▶无法找到源歌单：%s' % str((src_list_keyword,user_music_list)) )
                 continue
+            src_list_music_ids = cm.getMusicListDetail(src_list_id)
+            print('源歌单内容：%s' % str(src_list_music_ids))
             if dst_list_name in user_music_list:
                 dst_list_id = user_music_list[dst_list_name]
                 print('已有目标歌单：%s' % str((dst_list_id,dst_list_name)))
@@ -158,9 +160,7 @@ if __name__=='__main__':
                 dst_list_id = cm.createMusicList(dst_list_name)
                 print('创建目标歌单：%s' % str((dst_list_id,dst_list_name)))
             #day_music_ids = cm.getDaySend()
-            src_list_music_ids = cm.getMusicListDetail(src_list_id)
             dst_list_music_ids = cm.getMusicListDetail(dst_list_id)
-            print('源歌单：%s' % str(src_list_music_ids))
             will_add_list = []
             for music_id in src_list_music_ids:
                 if music_id in dst_list_music_ids:
