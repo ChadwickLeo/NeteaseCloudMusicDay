@@ -56,8 +56,10 @@ class CloudMusic:
         return False
 
     def getMusicListDetail(self,list_id):
-        """获取歌单详情"""
-        res=self.get('/playlist/detail?id=%s'%list_id)
+        #"""获取歌单详情"""
+        #res=self.get('/playlist/detail?id=%s'%list_id)
+        """获取歌单所有歌曲"""
+        res=self.get(f'/playlist/track/all?id={list_id}&limit=827')
         data=res.json()
         playlist=data.get('playlist')
         if not playlist:
