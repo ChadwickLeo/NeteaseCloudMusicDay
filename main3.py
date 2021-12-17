@@ -190,3 +190,25 @@ if __name__=='__main__':
         import traceback
         errmsg = '(E)' + '[' + ''.join(traceback.format_exc()) + ']'
         print(errmsg)
+
+"""测试语句
+/usr/bin/python3.6
+import requests as r
+s=r.session()
+s.get("http://127.0.0.1:3000/login/cellphone?phone=13621853761&password=0000-w11").json()
+s.get("http://127.0.0.1:3000/daily_signin").json()
+data=s.get("http://127.0.0.1:3000/user/playlist?uid=116945513").json()
+data=s.get("http://127.0.0.1:3000/playlist/detail?id=5160012695").json()
+playlist=data.get('playlist')
+tracks=playlist.get('tracks')
+ids=[]
+for item in tracks:
+    ids.append(str(item.get('id')))
+print(ids)
+data=s.get("http://127.0.0.1:3000/playlist/track/all?id=5160012695&limit=827").json()
+tracks=data.get('songs')
+ids=[]
+for item in tracks:
+    ids.append(str(item.get('id')))
+print(ids)
+"""
