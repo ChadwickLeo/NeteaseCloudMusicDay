@@ -56,15 +56,23 @@ class CloudMusic:
         return False
 
     def getMusicListDetail(self,list_id):
-        #"""获取歌单详情"""
-        #res=self.get('/playlist/detail?id=%s'%list_id)
-        """获取歌单所有歌曲"""
-        res=self.get(f'/playlist/track/all?id={list_id}&limit=827')
+        """获取歌单详情"""
+        res=self.get('/playlist/detail?id=%s'%list_id)
         data=res.json()
         playlist=data.get('playlist')
         if not playlist:
             return []
         tracks=playlist.get('tracks')
+        ids=[]
+        for item in tracks:
+            ids.append(str(item.get('id')))
+        return ids
+
+    def getMusicListTracks(self,list_id):
+        """获取歌单所有歌曲"""
+        res=self.get(f'/playlist/track/all?id={list_id}&limit=827')
+        data=res.json()
+        tracks=playlist.get('songs')
         ids=[]
         for item in tracks:
             ids.append(str(item.get('id')))
@@ -153,7 +161,8 @@ if __name__=='__main__':
             if not src_list_id:
                 print('【无法找到源歌单】%s' % str((src_list_keyword,user_music_list)) )
                 continue
-            src_list_music_ids = cm.getMusicListDetail(src_list_id)
+            #src_list_music_ids = cm.getMusicListDetail(src_list_id)
+            src_list_music_ids = cm.getMusicListTracks(src_list_id)
             print('源歌单内容：%s' % str(src_list_music_ids))
             if dst_list_name in user_music_list:
                 dst_list_id = user_music_list[dst_list_name]
@@ -162,7 +171,8 @@ if __name__=='__main__':
                 dst_list_id = cm.createMusicList(dst_list_name)
                 print('创建目标歌单：%s' % str((dst_list_id,dst_list_name)))
             #day_music_ids = cm.getDaySend()
-            dst_list_music_ids = cm.getMusicListDetail(dst_list_id)
+            #dst_list_music_ids = cm.getMusicListDetail(dst_list_id)
+            dst_list_music_ids = cm.getMusicListTracks(dst_list_id)
             will_add_list = []
             for music_id in src_list_music_ids:
                 if music_id in dst_list_music_ids:
