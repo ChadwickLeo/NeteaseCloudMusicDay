@@ -72,7 +72,7 @@ class CloudMusic:
         """获取歌单所有歌曲"""
         res=self.get(f'/playlist/track/all?id={list_id}&limit=827')
         data=res.json()
-        tracks=playlist.get('songs')
+        tracks=data.get('songs')
         ids=[]
         for item in tracks:
             ids.append(str(item.get('id')))
