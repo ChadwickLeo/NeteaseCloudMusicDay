@@ -195,7 +195,7 @@ if __name__=='__main__':
 /usr/bin/python3.6
 import requests as r
 s=r.session()
-s.get("http://127.0.0.1:3000/login/cellphone?phone=13621853761&password=0000-w11").json()
+s.get("http://127.0.0.1:3000/login/cellphone?phone=手机号&password=密码").json()
 s.get("http://127.0.0.1:3000/daily_signin").json()
 data=s.get("http://127.0.0.1:3000/user/playlist?uid=116945513").json()
 data=s.get("http://127.0.0.1:3000/playlist/detail?id=5160012695").json()
