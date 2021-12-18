@@ -185,7 +185,7 @@ if __name__=='__main__':
                 if res:
                     print(f'━━▶添加歌曲列表成功【{str(len(will_add_list))}】：{music_ids}')
                 else:
-                    print(f'◀━━添加歌曲列表失败【{str(len(will_add_list))}】：{music_ids}')
+                    print(f'◀━━添加歌曲列表失败【{str(len(will_add_list))}】：[{str(res)}]{music_ids}')
     except Exception as e:
         import traceback
         errmsg = '(E)' + '[' + ''.join(traceback.format_exc()) + ']'
