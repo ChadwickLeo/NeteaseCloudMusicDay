@@ -140,6 +140,7 @@ if __name__=='__main__':
                   '[电音小情歌]':'Electronic Love', 
                   '[公路之歌]':'Roadtrip', 
                   '[放克复古派对]':'Funk', 
+                  '[粤语流行精选]':'Cantonese',
                   '[法语浪漫订制]':'French', 
                   '[一周韩语上新]':'Korean', 
                   '[韩系小甜歌]':'Korean Sweet', 
