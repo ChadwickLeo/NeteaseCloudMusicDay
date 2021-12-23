@@ -50,7 +50,7 @@ class CloudMusic:
     def addMusicToList(self,list_id,music_ids):
         """添加歌单歌曲"""
         res=self.get('/playlist/tracks?op=add&pid=%s&tracks=%s'%(list_id,music_ids))
-        print('/playlist/tracks?op=add&pid=%s&tracks=%s'%(list_id,music_ids))
+        #print('/playlist/tracks?op=add&pid=%s&tracks=%s'%(list_id,music_ids))
         data=res.json().get('body')
         if data.get('code')==200:
             return ""
