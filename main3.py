@@ -50,10 +50,11 @@ class CloudMusic:
     def addMusicToList(self,list_id,music_ids):
         """添加歌单歌曲"""
         res=self.get('/playlist/tracks?op=add&pid=%s&tracks=%s'%(list_id,music_ids))
-        data=res.json()
+        print('/playlist/tracks?op=add&pid=%s&tracks=%s'%(list_id,music_ids))
+        data=res.json().get('body')
         if data.get('code')==200:
-            return True
-        return False
+            return ""
+        return f"{data.get('code')}-{data.get('message')}"
 
     def getMusicListDetail(self,list_id):
         """获取歌单详情"""
@@ -183,11 +184,11 @@ if __name__=='__main__':
                     will_add_list.append(music_id)
             if len(will_add_list) > 0:
                 music_ids = ','.join(will_add_list)
-                res = cm.addMusicToList(dst_list_id, music_ids)
-                if res:
+                errmsg = cm.addMusicToList(dst_list_id, music_ids)
+                if not errmsg:
                     print(f'━━▶添加歌曲列表成功【{str(len(will_add_list))}】：{music_ids}')
                 else:
-                    print(f'◀━━添加歌曲列表失败【{str(len(will_add_list))}】：[{str(res)}]{music_ids}')
+                    print(f'◀━━添加歌曲列表失败【{str(len(will_add_list))}】：[{str(errmsg)}]{music_ids}')
     except Exception as e:
         import traceback
         errmsg = '(E)' + '[' + ''.join(traceback.format_exc()) + ']'
@@ -197,7 +198,8 @@ if __name__=='__main__':
 /usr/bin/python3.6
 import requests as r
 s=r.session()
-s.get("http://127.0.0.1:3000/login/cellphone?phone=手机号&password=密码").json()
+(PhoneNo,Passwd) = ("","")
+s.get(f"http://127.0.0.1:3000/login/cellphone?phone={PhoneNo}&password={Passwd}").json()
 s.get("http://127.0.0.1:3000/daily_signin").json()
 data=s.get("http://127.0.0.1:3000/user/playlist?uid=116945513").json()
 data=s.get("http://127.0.0.1:3000/playlist/detail?id=5160012695").json()
@@ -213,4 +215,12 @@ ids=[]
 for item in tracks:
     ids.append(str(item.get('id')))
 print(ids)
+data=s.get("http://127.0.0.1:3000/recommend/songs").json()
+recommend=data.get('data').get('dailySongs')
+ids=[]
+for item in recommend:
+    ids.append(str(item.get('id')))
+data=s.get("http://127.0.0.1:3000/playlist/tracks?op=add&pid=7124292374&tracks=26771764").json().get('body')
+f"{data.get('code')}-{data.get('message')}"
 """
+
