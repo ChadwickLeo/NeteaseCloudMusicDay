@@ -2,6 +2,7 @@
 import requests as r
 import time
 import config
+import codecs,os,json
 
 class CloudMusic:
     def __init__(self,api,phone,password):
@@ -74,6 +75,9 @@ class CloudMusic:
         res=self.get(f'/playlist/track/all?id={list_id}&limit=827')
         data=res.json()
         tracks=data.get('songs')
+        if tracks:
+            with codecs.open(os.path.dirname(os.path.abspath(__file__))+'/playlist_'+list_id+'.json', 'w', encoding='utf-8') as f:
+                json.dump(data, f, sort_keys=False, indent=None, ensure_ascii=False)
         ids=[]
         for item in tracks:
             ids.append(str(item.get('id')))
