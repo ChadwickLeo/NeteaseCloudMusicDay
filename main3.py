@@ -148,7 +148,7 @@ if __name__=='__main__':
                   '华语私人定制':'Chinese',
                   '[粤语唱片行]':'Cantonese',
                   '[法语浪漫订制]':'French', 
-                  '[一周韩语上新]':'Korean', 
+                  '一周韩语上新':'Korean', 
                   '[韩系小甜歌]':'Korean Sweet', 
                   '日本流行精选':'Japanese', 
                   '[儿童趣味百科]':'Children Wiki', 
