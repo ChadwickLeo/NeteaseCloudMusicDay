@@ -173,13 +173,13 @@ if __name__=='__main__':
             print(f'〖源歌单列表({str(len(src_list_music_ids))})〗') #：{str(src_list_music_ids)}
             if dst_list_name in user_music_list:
                 dst_list_id = user_music_list[dst_list_name]
-                print('〖目标歌单已存在〗%s' % str((dst_list_id,dst_list_name)))
+                #dst_list_music_ids = cm.getMusicListDetail(dst_list_id)
+                dst_list_music_ids = cm.getMusicListTracks(dst_list_id)
+                print('〖目标歌单已存在〗%s' % str((dst_list_id,dst_list_name,len(dst_list_music_ids))))
             else:
-                dst_list_id = cm.createMusicList(dst_list_name)
-                print('〖目标歌单已新建〗%s' % str((dst_list_id,dst_list_name)))
+                (dst_list_id,dst_list_music_ids) = (cm.createMusicList(dst_list_name),[])
+                print('〖目标歌单已新建〗%s' % str((dst_list_id,dst_list_name,0)))
             #day_music_ids = cm.getDaySend()
-            #dst_list_music_ids = cm.getMusicListDetail(dst_list_id)
-            dst_list_music_ids = cm.getMusicListTracks(dst_list_id)
             will_add_list = []
             for music_id in src_list_music_ids:
                 if music_id in dst_list_music_ids:
@@ -190,7 +190,7 @@ if __name__=='__main__':
                 music_ids = ','.join(will_add_list)
                 errmsg = cm.addMusicToList(dst_list_id, music_ids)
                 if not errmsg:
-                    print(f'━━▶添加歌曲列表成功【{str(len(will_add_list))}】：{music_ids}')
+                    print(f'━━▶添加歌曲列表成功【+{str(len(will_add_list))}】：{music_ids}')
                 else:
                     print(f'◀━━添加歌曲列表失败【{str(len(will_add_list))}】：[{str(errmsg)}]{music_ids}')
     except Exception as e:
