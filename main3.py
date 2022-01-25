@@ -53,9 +53,9 @@ class CloudMusic:
         res=self.get('/playlist/tracks?op=add&pid=%s&tracks=%s'%(list_id,music_ids))
         #print('/playlist/tracks?op=add&pid=%s&tracks=%s'%(list_id,music_ids))
         data=res.json().get('body')
-        if data.get('code')==200:
+        if data and data.get('code')==200:
             return ""
-        return f"{data.get('code')}-{data.get('message')}"
+        return f"{data.get('code')}-{data.get('message')}" if data else str(data)
 
     def getMusicListDetail(self,list_id):
         """获取歌单详情"""
