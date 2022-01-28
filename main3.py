@@ -89,7 +89,7 @@ class CloudMusic:
             with codecs.open(os.path.dirname(os.path.abspath(__file__))+'/playlist_'+list_id+'.json', 'a+', encoding='utf-8') as f:
                 old_data = f.read()
                 old_songs = json.loads(old_data)["songs"]
-                data["songs"] = mergeDictListByKey(old_songs, data["songs"], "id")
+                data["songs"] = mergeDictListByKey(old_songs, tracks, "id")
                 f.seek(0)
                 #f.write(output)
                 json.dump(data, f, sort_keys=False, indent=None, ensure_ascii=False)
