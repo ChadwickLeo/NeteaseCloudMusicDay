@@ -87,7 +87,7 @@ class CloudMusic:
         tracks=data.get('songs')
         if tracks:
             f = codecs.open(os.path.dirname(os.path.abspath(__file__))+'/playlist_'+list_id+'.json', 'a+', encoding='utf-8')
-            if f.tell():  # 文件已存在,则将返回的歌曲并入
+            if f.tell():  # 文件已存在数据,则将返回的歌曲并入其中
                 f.seek(0)
                 data["songs"] = mergeDictListByKey(json.load(f)["songs"], tracks, "id")
             f.seek(0)
