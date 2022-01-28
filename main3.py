@@ -4,6 +4,16 @@ import time
 import config
 import codecs,os,json
 
+def mergeDictListByKey(dictList1, dictList2, key):
+    for elm2 in dictList2:
+        existFlag = False
+        for elm1 in dictList1:
+            if elm2[key] == elm1[key]:
+                existFlag = True
+                break
+        if not existFlag: dictList1.append(elm2)
+    return dictList1
+
 class CloudMusic:
     def __init__(self,api,phone,password):
         self.api = api
@@ -76,8 +86,14 @@ class CloudMusic:
         data=res.json()
         tracks=data.get('songs')
         if tracks:
-            with codecs.open(os.path.dirname(os.path.abspath(__file__))+'/playlist_'+list_id+'.json', 'w', encoding='utf-8') as f:
+            with codecs.open(os.path.dirname(os.path.abspath(__file__))+'/playlist_'+list_id+'.json', 'a+', encoding='utf-8') as f:
+                old_data = f.read()
+                old_songs = json.loads(old_data)["songs"]
+                data["songs"] = mergeDictListByKey(old_songs, data["songs"], "id")
+                f.seek(0)
+                #f.write(output)
                 json.dump(data, f, sort_keys=False, indent=None, ensure_ascii=False)
+                f.truncate()
         ids=[]
         for item in tracks:
             ids.append(str(item.get('id')))
