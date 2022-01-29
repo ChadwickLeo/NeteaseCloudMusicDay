@@ -91,8 +91,8 @@ class CloudMusic:
                 f.seek(0)
                 data["songs"] = mergeDictListByKey(json.load(f)["songs"], tracks, "id")
             f.seek(0)
-            json.dump(data, f, sort_keys=False, indent=None, ensure_ascii=False)
             f.truncate()
+            json.dump(data, f, sort_keys=False, indent=None, ensure_ascii=False)
         ids=[]
         for item in tracks:
             ids.append(str(item.get('id')))
