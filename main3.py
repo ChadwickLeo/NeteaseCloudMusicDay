@@ -91,6 +91,7 @@ class CloudMusic:
             if f.tell():  # 文件已存在数据,则将返回的歌曲并入其中
                 f.seek(0)
                 data["songs"] = mergeDictListByKey(json.load(f)["songs"], tracks, "id")
+                data["count"] = len(data["songs"])
             f.seek(0)
             f.truncate()
             json.dump(data, f, sort_keys=False, indent=None, ensure_ascii=False)
