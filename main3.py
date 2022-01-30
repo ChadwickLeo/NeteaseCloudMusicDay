@@ -87,7 +87,7 @@ class CloudMusic:
         tracks=data.get('songs')
         if save_with_name and tracks:
             #data = dict({"name":save_with_name, "count":len(tracks)}).update(data)
-            data = {"name":save_with_name, "count":len(tracks),**data}
+            data = {"名称":save_with_name, "总数":len(tracks),**data} # 增加歌单名称和歌曲总数数据项
             if not os.path.exists(os.path.dirname(os.path.abspath(__file__))+'/playlist_backup'): os.makedirs(os.path.dirname(os.path.abspath(__file__))+'/playlist_backup')
             f = codecs.open(os.path.dirname(os.path.abspath(__file__))+'/playlist_backup/playlist_'+list_id+'.json', 'a+', encoding='utf-8')
             if f.tell():  # 文件已存在数据,则将返回的歌曲并入其中
