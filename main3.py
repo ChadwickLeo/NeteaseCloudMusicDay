@@ -80,13 +80,13 @@ class CloudMusic:
             ids.append(str(item.get('id')))
         return ids
 
-    def getMusicListTracks(self,list_id):
+    def getMusicListTracks(self,list_id,save_with_name=""):
         """获取歌单所有歌曲"""
         res=self.get(f'/playlist/track/all?id={list_id}&limit=827')
         data=res.json()
         tracks=data.get('songs')
-        if tracks:
-            data = dict({"count":len(tracks)}).update(data)
+        if save_with_name and tracks:
+            data = dict({"name":save_with_name, "count":len(tracks)}).update(data)
             if not os.path.exists(os.path.dirname(os.path.abspath(__file__))+'/playlist_backup'): os.makedirs(os.path.dirname(os.path.abspath(__file__))+'/playlist_backup')
             f = codecs.open(os.path.dirname(os.path.abspath(__file__))+'/playlist_backup/playlist_'+list_id+'.json', 'a+', encoding='utf-8')
             if f.tell():  # 文件已存在数据,则将返回的歌曲并入其中
@@ -192,7 +192,7 @@ if __name__=='__main__':
             if dst_list_name in user_music_list:
                 dst_list_id = user_music_list[dst_list_name]
                 #dst_list_music_ids = cm.getMusicListDetail(dst_list_id)
-                dst_list_music_ids = cm.getMusicListTracks(dst_list_id)
+                dst_list_music_ids = cm.getMusicListTracks(dst_list_id,dst_list_name)
                 print('〖目标歌单已存在〗%s' % str((dst_list_id,dst_list_name,len(dst_list_music_ids))))
             else:
                 (dst_list_id,dst_list_music_ids) = (cm.createMusicList(dst_list_name),[])
