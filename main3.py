@@ -92,7 +92,7 @@ class CloudMusic:
             f = codecs.open(os.path.dirname(os.path.abspath(__file__))+'/playlist_backup/playlist_'+list_id+'.json', 'a+', encoding='utf-8')
             if f.tell():  # 文件已存在数据,则将返回的歌曲并入其中
                 f.seek(0)
-                data["songs"] = mergeDictListByKey(json.load(f)["songs"], tracks, "id")
+                data["songs"] = mergeDictListByKey(json.load(f)["songs"], tracks, "id") # 根据ID合并更新歌曲数据
                 data["总数"] = len(data["songs"]) # 更新 歌曲总数
             f.seek(0)
             f.truncate()
