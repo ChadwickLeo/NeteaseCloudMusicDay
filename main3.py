@@ -86,11 +86,11 @@ class CloudMusic:
         data=res.json()
         tracks=data.get('songs')
         if save_with_name and tracks:
-            print(f'〖歌单保存({save_with_name})〗')
+            #print(f'〖歌单保存({save_with_name})〗')
             #data = dict({"name":save_with_name, "count":len(tracks)}).update(data)
             data = {"名称":save_with_name, "总数":len(tracks),**data} # 增加 歌单名称 和 歌曲总数 数据项
             if not os.path.exists(os.path.dirname(os.path.abspath(__file__))+'/playlist_backup'): os.makedirs(os.path.dirname(os.path.abspath(__file__))+'/playlist_backup')
-            f = codecs.open(os.path.dirname(os.path.abspath(__file__))+'/playlist_backup/playlist_'+list_id+'.json', 'a+', encoding='utf-8')
+            f = codecs.open(os.path.dirname(os.path.abspath(__file__))+'/playlist_backup/playlist('+save_with_name+').json', 'a+', encoding='utf-8')
             if f.tell():  # 文件已存在数据,则将返回的歌曲并入其中
                 f.seek(0)
                 data["songs"] = mergeDictListByKey(json.load(f)["songs"], tracks, "id") # 根据ID合并更新歌曲数据
@@ -189,7 +189,7 @@ if __name__=='__main__':
                 print('【源歌单未找到】%s' % str((src_list_keyword,user_music_list)) )
                 continue
             #src_list_music_ids = cm.getMusicListDetail(src_list_id)
-            src_list_music_ids = cm.getMusicListTracks(src_list_id)
+            src_list_music_ids = cm.getMusicListTracks(src_list_id,dst_list_name)
             print(f'〖源歌单列表({str(len(src_list_music_ids))})〗') #：{str(src_list_music_ids)}
             if dst_list_name in user_music_list:
                 dst_list_id = user_music_list[dst_list_name]
