@@ -153,9 +153,8 @@ if __name__=='__main__':
                   '[时光点唱机]':'90s', 
                   '[青春点唱机]':'00s',  
                   '[流行点唱机]':'10s', 
-                  '80年代精选':'80s collection',  
-                  # '90年代精选':'90s collection',  
-                  '经典老歌，世代流传的宝藏':'90s collection', 
+                  '80年代精选':'80s collection',
+                  '经典老歌，世代流传的宝藏':'90s collection', # 90年代精选
                   '00年代精选':'00s collection',  
                   '10年代精选':'10s collection', 
                   '缠绵精选':'Romantic', 
@@ -177,7 +176,7 @@ if __name__=='__main__':
                   '闽南语精选':'Minnan',
                   '[粤语唱片行]':'Cantonese',
                   '[法语浪漫订制]':'French', 
-                  '西班牙语精选':'Spanish', 
+                  '西语精选':'Spanish',   # 西班牙语精选
                   '德语精选':'German', 
                   '越南语精选':'Vietnamese', 
                   '泰语精选':'Thai', 
