@@ -154,7 +154,7 @@ if __name__=='__main__':
                   '[青春点唱机]':'00s',  
                   '[流行点唱机]':'10s', 
                   '80年代精选':'80s collection',
-                  '经典老歌，世代流传的宝藏':'90s collection', # 90年代精选
+                  '90年代精选':'90s collection',
                   '00年代精选':'00s collection',  
                   '10年代精选':'10s collection', 
                   '缠绵精选':'Romantic', 
@@ -176,7 +176,7 @@ if __name__=='__main__':
                   '闽南语精选':'Minnan',
                   '[粤语唱片行]':'Cantonese',
                   '[法语浪漫订制]':'French', 
-                  '西语精选':'Spanish',   # 西班牙语精选
+                  '西语精选#西班牙语精选':'Spanish',
                   '德语精选':'German', 
                   '越南语精选':'Vietnamese', 
                   '泰语精选':'Thai', 
@@ -191,15 +191,17 @@ if __name__=='__main__':
                   '[儿童诗词吟唱]':'Children Poems', 
                   '[亲子欢乐儿歌]':'Children Games'}
          # 虚位以待 深厚磁性男声
-        for src_list_keyword,dst_list_name in SYNC_LIST.items():
+        for src_list_keywords,dst_list_name in SYNC_LIST.items():
             src_list_id = ""
             for list_name in user_music_list:
-                if src_list_keyword in list_name:
-                    src_list_id = user_music_list[list_name]
-                    print('【源歌单已找到】%s' % str((src_list_id,list_name)) )
-                    break
+                for src_list_keyword in src_list_keywords.strip("# ").split("#"):
+                    if src_list_keyword in list_name:
+                        src_list_id = user_music_list[list_name]
+                        print('【源歌单已找到】%s' % str((src_list_id,list_name)) )
+                        break
+                if src_list_id: break
             if not src_list_id:
-                print('【源歌单未找到】%s' % str((src_list_keyword,user_music_list)) )
+                print('【源歌单未找到】%s' % str((src_list_keywords,user_music_list)) )
                 continue
             #src_list_music_ids = cm.getMusicListDetail(src_list_id)
             src_list_music_ids = cm.getMusicListTracks(src_list_id,dst_list_name)
@@ -260,3 +262,4 @@ for item in recommend:
 data=s.get("http://127.0.0.1:3000/playlist/tracks?op=add&pid=7124292374&tracks=26771764").json().get('body')
 f"{data.get('code')}-{data.get('message')}"
 """
+
