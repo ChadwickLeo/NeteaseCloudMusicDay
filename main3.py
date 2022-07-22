@@ -27,10 +27,10 @@ class CloudMusic:
     def login(self):
         """登录"""
         res = self.get('/login/cellphone?phone=%s&password=%s' % (self.phone, self.password))
-        data=res.json()
+        data = res.json()
         if data.get('account'):
-            return data.get('account').get('id')
-        return None
+            return ( data.get('account').get('id'), data )
+        return ( None, data )
 
     def refresh(self):
         """刷新登录状态"""
@@ -132,9 +132,9 @@ if __name__=='__main__':
     password=config.password
     print('开始登录')
     cm=CloudMusic(api,phone,password)
-    uid=cm.login()
+    uid,login_data=cm.login()
     if not uid:
-        print('登录失败')
+        print(f'登录失败:{str(login_data)}')
         exit(0)
     print('【uid=%s】'%uid)
     try:
