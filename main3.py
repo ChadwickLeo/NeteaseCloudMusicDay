@@ -177,7 +177,7 @@ if __name__=='__main__':
                   '闽南语精选':'Minnan',
                   '[粤语唱片行]':'Cantonese',
                   '[法语浪漫订制]':'French', 
-                  '西语精选#西班牙语精选':'Spanish',
+                  '西语精选#西班牙语精选@6686195801':'Spanish',
                   '德语精选':'German', 
                   '越南语精选':'Vietnamese', 
                   '泰语精选':'Thai', 
