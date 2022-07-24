@@ -135,11 +135,12 @@ if __name__=='__main__':
     uid,login_data=cm.login()
     if not uid:
         print(f'登录失败:{str(login_data)}')
-        exit(0)
+        # exit(0)  # 登录失败仍继续
     print('【uid=%s】'%uid)
     try:
-        print('开始签到')
-        cm.qiandao()
+        if uid:  # 登录成功时签到
+            print('开始签到')
+            cm.qiandao()
         print('开始处理歌单')
         #if int(time.strftime('%H'))<8:
             #网易云6点更新推荐 8点后处理避免将昨天的歌单放到今天的歌单里
