@@ -62,10 +62,10 @@ class CloudMusic:
         """添加歌单歌曲"""
         res=self.get('/playlist/tracks?op=add&pid=%s&tracks=%s'%(list_id,music_ids))
         #print('/playlist/tracks?op=add&pid=%s&tracks=%s'%(list_id,music_ids))
-        data=res.json().get('body')
+        data=res.json().get('body') if res.json().get('body') else res.json()
         if data and data.get('code')==200:
             return ""
-        return f"{data.get('code')}-{data.get('message')}" if data else f"body not found in res:{res.json()}"
+        return f"{data.get('code')}-{data.get('message')}" if data else f"unrecognized res:{res.json()}"
 
     def getMusicListDetail(self,list_id):
         """获取歌单详情"""
