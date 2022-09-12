@@ -194,7 +194,7 @@ if __name__=='__main__':
                   '[亲子欢乐儿歌]':'Children Games'}
          # 虚位以待 深厚磁性男声
         for src_list_keywords,dst_list_name in SYNC_LIST.items():
-            src_list_id = src_list_keywords.rpartition("@")[1]
+            src_list_id = src_list_keywords.rpartition("@")[2]
             if src_list_id:  # 优先从名字中获取歌单ID
                 print('【源歌单已找到】%s' % str((src_list_id)) )
             elif uid:   # 其次获取歌单列表并通过关键字匹配
@@ -211,7 +211,7 @@ if __name__=='__main__':
             #src_list_music_ids = cm.getMusicListDetail(src_list_id)
             src_list_music_ids = cm.getMusicListTracks(src_list_id,dst_list_name)
             print(f'〖源歌单列表({str(len(src_list_music_ids))})〗') #：{str(src_list_music_ids)}
-            dst_list_id = dst_list_name.rpartition("@")[1]
+            dst_list_id = dst_list_name.rpartition("@")[2]
             if dst_list_id:  # 优先从名字中获取歌单ID
                 print('〖目标歌单已存在〗%s' % str((dst_list_id)) )
             elif dst_list_name in user_music_list:   # 其次获取歌单列表并通过关键字匹配
