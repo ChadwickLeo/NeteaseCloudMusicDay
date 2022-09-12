@@ -65,7 +65,7 @@ class CloudMusic:
         data=res.json().get('body')
         if data and data.get('code')==200:
             return ""
-        return f"{data.get('code')}-{data.get('message')}" if data else f"body not found in res:{res}"
+        return f"{data.get('code')}-{data.get('message')}" if data else f"body not found in res:{res.json()}"
 
     def getMusicListDetail(self,list_id):
         """获取歌单详情"""
