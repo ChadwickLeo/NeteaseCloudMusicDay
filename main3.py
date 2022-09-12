@@ -99,8 +99,9 @@ class CloudMusic:
             f.truncate()
             json.dump(data, f, sort_keys=False, indent=None, ensure_ascii=False)
         ids=[]
-        for item in tracks:
-            ids.append(str(item.get('id')))
+        if tracks:
+            for item in tracks:
+                ids.append(str(item.get('id')))
         return ids
 
     def getUserMusicList(self,uid):
