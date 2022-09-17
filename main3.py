@@ -149,8 +149,9 @@ if __name__=='__main__':
         #    exit(0)
         user_music_list = cm.getUserMusicList(uid)
         SYNC_LIST = {'[宝藏系女孩]':'Exotic', 
-                  '[宝藏系男孩]':'Exotic Male', 
+                  '[聚精会神]':'Concentration',
                   '[东方禅意]':'Chinese Folk',
+                  '[宝藏系男孩]':'Exotic Male', 
                   '[怀旧点唱机]':'80s',  
                   '[时光点唱机]':'90s', 
                   '[青春点唱机]':'00s',  
@@ -165,7 +166,6 @@ if __name__=='__main__':
                   '[今夜晚点睡]':'Romance', 
                   '[浪漫婚礼专用]':'Sweet Love', 
                   '[阅读好时光]':'Reading', 
-                  '[聚精会神]':'Concentration',
                   '[运动随身听]':'Sports',  
                   '[大自然纯音]':'Nature', 
                   '[古典歌剧典藏]':'Opera', 
