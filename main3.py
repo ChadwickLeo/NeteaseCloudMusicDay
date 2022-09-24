@@ -5,6 +5,7 @@ import config
 import codecs,os,json
 
 def mergeDictListByKey(dictList1, dictList2, key):
+    intListLengthBefore = len(dictList1)
     for elm2 in dictList2:
         existFlag = False
         for elm1 in dictList1:
@@ -12,6 +13,8 @@ def mergeDictListByKey(dictList1, dictList2, key):
                 existFlag = True
                 break
         if not existFlag: dictList1.append(elm2)
+    if intListLengthBefore != len(dictList1):
+        print(f'列表合并({intListLengthBefore}->{len(dictList1)})')
     return dictList1
 
 class CloudMusic:
