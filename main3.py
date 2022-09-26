@@ -14,7 +14,7 @@ def mergeDictListByKey(dictList1, dictList2, key):
                 break
         if not existFlag: dictList1.append(elm2)
     if intListLengthBefore != len(dictList1):
-        print(f'列表合并({intListLengthBefore}->{len(dictList1)})')
+        print(f'〖列表合并〗({intListLengthBefore}->{len(dictList1)})')
     return dictList1
 
 class CloudMusic:
