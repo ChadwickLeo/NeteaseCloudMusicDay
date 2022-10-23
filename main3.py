@@ -14,7 +14,7 @@ def mergeDictListByKey(dictList1, dictList2, key):
                 break
         if not existFlag: dictList1.append(elm2)
     if intListLengthBefore != len(dictList1):
-        print(f'〖本地列表合并{len(dictList1)-intListLengthBefore}〗({intListLengthBefore}->{len(dictList1)})')
+        print(f'〖本地列表合并变化{len(dictList1)-intListLengthBefore}〗({intListLengthBefore}->{len(dictList1)})')
     else:
         print(f'〖本地列表〗({intListLengthBefore})')
     return dictList1
