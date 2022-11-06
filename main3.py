@@ -155,6 +155,8 @@ if __name__=='__main__':
         user_music_list = cm.getUserMusicList(uid)
         SYNC_LIST = {'[宝藏系女孩]':'Exotic', 
                   '[聚精会神]':'Concentration',
+                  '闽南语精选':'Minnan',
+                  '[闽南语唱片行]':'Minnan',
                   '[东方禅意]':'Chinese Folk',
                   '[宝藏系男孩]':'Exotic Male', 
                   '[怀旧点唱机]':'80s',  
@@ -181,8 +183,6 @@ if __name__=='__main__':
                   '[公路之歌]':'Roadtrip', 
                   '[放克复古派对]':'Funk', 
                   '华语私人':'Chinese',
-                  '闽南语精选':'Minnan',
-                  '[闽南语唱片行]':'Minnan',
                   '[粤语唱片行]':'Cantonese',
                   '[法语浪漫订制]':'French', 
                   '西语精选#西班牙语精选@6686195801':'Spanish',
