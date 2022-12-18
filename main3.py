@@ -142,7 +142,7 @@ if __name__=='__main__':
     if not uid:
         print(f'登录失败:{str(login_data)}')
         exit(0)
-    print('【uid=%s】'%uid)
+    print(f'【uid={str(uid)}】【login_data={str(login_data)}】')
     try:
         if uid:  # 登录成功时签到
             print('开始签到')
