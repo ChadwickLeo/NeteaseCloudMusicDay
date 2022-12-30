@@ -2,7 +2,7 @@
 import requests as r
 import time
 import config
-import codecs,os,json,urllib
+import codecs,os,json,urllib,sys
 
 def mergeDictListByKey(dictList1, dictList2, key):
     intListLengthBefore = len(dictList1)
