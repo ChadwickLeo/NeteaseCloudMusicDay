@@ -30,6 +30,14 @@ class CloudMusic:
     def get(self,url):
         return self.s.get( self.api + url + ( f"&cookie={urllib.parse.quote_plus(self.cookie)}" if self.cookie else "" ) )
 
+    def loginStatus(self):
+        """获取登录状态"""
+        res=self.get('/login/status?timerstamp=%s' % (time.time()))
+        data=res.json()
+        if data and data.get('data') and data.get('data').get('code')==200 and data.get('data').get('account') and data.get('data').get('account').get('status')==0:
+            return ( data.get('data').get('account').get('id'), data )
+        return ( None, data )
+    
     def login(self,cookie_refresh):
         """登录"""
         uid,login_data = ( None, None )
@@ -40,14 +48,6 @@ class CloudMusic:
             if data.get('account'): uid,login_data = ( data.get('account').get('id'), data )
             if data.get('cookie') and str(data.get('cookie')).strip(): print(f"OUTVAR_COOKIE:{data.get('cookie')}")
         return ( uid,login_data )
-
-    def loginStatus(self):
-        """获取登录状态"""
-        res=self.get('/login/status?timerstamp=%s' % (time.time()))
-        data=res.json()
-        if data and data.get('data') and data.get('data').get('code')==200 and data.get('data').get('account') and data.get('data').get('account').get('status')==0:
-            return ( data.get('data').get('account').get('id'), data )
-        return ( None, data )
 
     def refresh(self):
         """刷新登录状态"""
