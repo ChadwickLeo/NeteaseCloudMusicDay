@@ -42,10 +42,9 @@ class CloudMusic:
         """获取登录状态"""
         res=self.get('/login/status?timerstamp=%s' % (time.time()))
         data=res.json()
-        if data.get('code')==200:
-            return True
-        print(data)
-        return False
+        if data and data.get('data') and data.get('data').get('code')==200 and data.get('data').get('account') and data.get('data').get('account').get('status')==0:
+            return ( data.get('data').get('account').get('id'), data )
+        return ( None, data )
 
     def refresh(self):
         """刷新登录状态"""
@@ -150,7 +149,7 @@ if __name__=='__main__':
     cookie = sys.argv[1] if argvLength>1 else ""  # 参数1-Cookie
     print('开始登录')
     cm=CloudMusic(api,phone,password,cookie)
-    uid,login_data=cm.login()
+    uid,login_data=cm.loginStatus() #login()
     if not uid:
         print(f'登录失败:{str(login_data)}')
         exit(0)
