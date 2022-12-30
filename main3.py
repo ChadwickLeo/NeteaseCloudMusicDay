@@ -2,7 +2,7 @@
 import requests as r
 import time
 import config
-import codecs,os,json
+import codecs,os,json,urllib
 
 def mergeDictListByKey(dictList1, dictList2, key):
     intListLengthBefore = len(dictList1)
@@ -20,14 +20,15 @@ def mergeDictListByKey(dictList1, dictList2, key):
     return dictList1
 
 class CloudMusic:
-    def __init__(self,api,phone,password):
+    def __init__(self,api,phone,password,cookie):
         self.api = api
         self.phone=phone
         self.password=password
+        self.cookie=cookie
         self.s=r.session()
 
     def get(self,url):
-        return self.s.get(self.api+url)
+        return self.s.get( self.api + url + ( f"&cookie={urllib.parse.quote_plus(self.cookie)}" if self.cookie else "" ) )
 
     def login(self):
         """登录"""
@@ -36,6 +37,15 @@ class CloudMusic:
         if data.get('account'):
             return ( data.get('account').get('id'), data )
         return ( None, data )
+
+    def loginStatus(self):
+        """获取登录状态"""
+        res=self.get('/login/status?timerstamp=%s' % (time.time()))
+        data=res.json()
+        if data.get('code')==200:
+            return True
+        print(data)
+        return False
 
     def refresh(self):
         """刷新登录状态"""
@@ -136,8 +146,10 @@ if __name__=='__main__':
     api=config.api
     phone=config.phone
     password=config.password
+    argvLength = len(sys.argv)
+    cookie = sys.argv[1] if argvLength>1 else ""  # 参数1-Cookie
     print('开始登录')
-    cm=CloudMusic(api,phone,password)
+    cm=CloudMusic(api,phone,password,cookie)
     uid,login_data=cm.login()
     if not uid:
         print(f'登录失败:{str(login_data)}')
