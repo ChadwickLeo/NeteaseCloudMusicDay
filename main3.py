@@ -30,13 +30,16 @@ class CloudMusic:
     def get(self,url):
         return self.s.get( self.api + url + ( f"&cookie={urllib.parse.quote_plus(self.cookie)}" if self.cookie else "" ) )
 
-    def login(self):
+    def login(self,cookie_refresh):
         """登录"""
-        res = self.get('/login/cellphone?phone=%s&password=%s' % (self.phone, self.password))
-        data = res.json()
-        if data.get('account'):
-            return ( data.get('account').get('id'), data )
-        return ( None, data )
+        uid,login_data = ( None, None )
+        if self.cookie: uid,login_data = loginStatus()
+        if not uid or cookie_refresh == '1':
+            res = self.get('/login/cellphone?phone=%s&password=%s' % (self.phone, self.password))
+            data = res.json()
+            if data.get('account'): uid,login_data = ( data.get('account').get('id'), data )
+            if data.get('cookie'): print(f"OUTVAR_COOKIE:{data.get('cookie')}")
+        return ( uid,login_data )
 
     def loginStatus(self):
         """获取登录状态"""
@@ -147,9 +150,10 @@ if __name__=='__main__':
     password=config.password
     argvLength = len(sys.argv)
     cookie = sys.argv[1] if argvLength>1 else ""  # 参数1-Cookie
+    cookie_refresh = sys.argv[2] if argvLength>2 else ""  # 参数2-Cookie刷新(值为字符串"1"时强制刷新)
     print('开始登录')
     cm=CloudMusic(api,phone,password,cookie)
-    uid,login_data=cm.loginStatus() #login()
+    uid,login_data=cm.login(cookie_refresh)
     if not uid:
         print(f'登录失败:{str(login_data)}')
         exit(0)
