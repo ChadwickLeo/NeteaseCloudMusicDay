@@ -38,7 +38,7 @@ class CloudMusic:
             res = self.get('/login/cellphone?phone=%s&password=%s' % (self.phone, self.password))
             data = res.json()
             if data.get('account'): uid,login_data = ( data.get('account').get('id'), data )
-            if data.get('cookie'): print(f"OUTVAR_COOKIE:{data.get('cookie')}")
+            if data.get('cookie') and str(data.get('cookie')).strip(): print(f"OUTVAR_COOKIE:{data.get('cookie')}")
         return ( uid,login_data )
 
     def loginStatus(self):
