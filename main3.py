@@ -42,6 +42,8 @@ class CloudMusic:
             if data.get('account'):
                 uid,login_data = ( data.get('account').get('id'), data )
                 print(f'手机号登录成功')
+            else:
+                print(f'手机号登录失败:{str(data)}')
             # 二维码登录参考  https://github.com/crayonxin2000/NeteaseCloudPlayListDownload/blob/be6806a325a3e8c1b4626bb02e25d19a165a3334/musics.py https://github.com/NKID00/NeteaseCloudMusicApiPy/blob/731e8c405928d38be693739cff6449e3426d22c7/ncmapi.py
             # key = self.get('/login/qr/key?timerstamp=%s' % (time.time())).json().get('data').get('unikey')
             # qrimg = self.get('/login/qr/create?key=%s&qrimg=true&timerstamp=%s' % (key, time.time())).json().get('data').get('qrimg')
