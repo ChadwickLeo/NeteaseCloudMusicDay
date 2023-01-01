@@ -36,6 +36,7 @@ class CloudMusic:
         if self.cookie: uid,login_data = self.loginStatus()
         if not uid or cookie_refresh == '1':
             # 手机号登录
+            print(f'尝试手机号登录')
             res = self.get('/login/cellphone?phone=%s&password=%s' % (self.phone, self.password))
             data = res.json()
             if data.get('account'):
@@ -53,6 +54,7 @@ class CloudMusic:
 
     def loginStatus(self):
         """获取登录状态"""
+        print(f'尝试cookie登录')
         res=self.get('/login/status?timerstamp=%s' % (time.time()))
         data=res.json()
         if data and data.get('data') and data.get('data').get('code')==200 and data.get('data').get('account') and data.get('data').get('account').get('status')==0:
