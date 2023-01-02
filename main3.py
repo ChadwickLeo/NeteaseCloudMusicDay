@@ -170,7 +170,7 @@ if __name__=='__main__':
     cm=CloudMusic(api,phone,password,cookie)
     uid,login_data=cm.login(cookie_refresh)
     if not uid:
-        print(f'登录失败:{str(login_data)}')
+        print(f'账号登录失败:{str(login_data)}')
         exit(0)
     print(f'【uid={str(uid)}】【login_data={str(login_data)}】')
     try:
