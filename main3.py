@@ -62,7 +62,9 @@ class CloudMusic:
             # data = self.get('/login/qr/check?key=%s&timerstamp=%s' % (key, time.time())).json()
             # if data.get('code')== 803: print(f'授权登录成功,返回cookie[{data.get('cookie')}])
             # 邮箱登录参考
-            if data.get('cookie') and str(data.get('cookie')).strip(): print(f"OUTVAR_COOKIE:{data.get('cookie')}")
+            if data.get('cookie') and str(data.get('cookie')).strip():
+                self.cookie=data.get('cookie')
+                print(f"OUTVAR_COOKIE:{data.get('cookie')}")
         return ( uid,login_data )
 
     def loginStatus(self):
