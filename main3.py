@@ -20,10 +20,12 @@ def mergeDictListByKey(dictList1, dictList2, key):
     return dictList1
 
 class CloudMusic:
-    def __init__(self,api,phone,password,cookie):
+    def __init__(self,api,phone,phone_pwd,email,email_pwd,cookie):
         self.api = api
         self.phone=phone
-        self.password=password
+        self.phone_pwd=phone_pwd
+        self.email=email
+        self.email_pwd=email_pwd
         self.cookie=cookie
         self.s=r.session()
 
@@ -35,15 +37,24 @@ class CloudMusic:
         uid,login_data = ( None, None )
         if self.cookie: uid,login_data = self.loginStatus()
         if not uid or cookie_refresh == '1':
-            # 手机号登录
-            print(f'尝试手机号登录')
-            res = self.get('/login/cellphone?phone=%s&password=%s' % (self.phone, self.password))
+            # 邮箱登录
+            print(f'尝试邮箱登录')
+            res = self.get('/login?email=%s&password=%s' % (self.email, self.email_pwd))
             data = res.json()
             if data.get('account'):
                 uid,login_data = ( data.get('account').get('id'), data )
-                print(f'手机号登录成功')
+                print(f'邮箱登录成功')
             else:
-                print(f'手机号登录失败:{str(data)}')
+                print(f'邮箱登录失败:{str(data)}')
+                # 手机号登录
+                print(f'尝试手机号登录')
+                res = self.get('/login/cellphone?phone=%s&password=%s' % (self.phone, self.phone_pwd))
+                data = res.json()
+                if data.get('account'):
+                    uid,login_data = ( data.get('account').get('id'), data )
+                    print(f'手机号登录成功')
+                else:
+                    print(f'手机号登录失败:{str(data)}')
             # 二维码登录参考  https://github.com/crayonxin2000/NeteaseCloudPlayListDownload/blob/be6806a325a3e8c1b4626bb02e25d19a165a3334/musics.py https://github.com/NKID00/NeteaseCloudMusicApiPy/blob/731e8c405928d38be693739cff6449e3426d22c7/ncmapi.py
             # key = self.get('/login/qr/key?timerstamp=%s' % (time.time())).json().get('data').get('unikey')
             # qrimg = self.get('/login/qr/create?key=%s&qrimg=true&timerstamp=%s' % (key, time.time())).json().get('data').get('qrimg')
@@ -162,12 +173,14 @@ class CloudMusic:
 if __name__=='__main__':
     api=config.api
     phone=config.phone
-    password=config.password
+    phone_pwd=config.phone_pwd
+    email=config.email
+    email_pwd=config.email_pwd
     argvLength = len(sys.argv)
     cookie = sys.argv[1] if argvLength>1 else ""  # 参数1-Cookie
     cookie_refresh = sys.argv[2] if argvLength>2 else ""  # 参数2-Cookie刷新(值为字符串"1"时强制刷新)
     print('开始登录')
-    cm=CloudMusic(api,phone,password,cookie)
+    cm=CloudMusic(api,phone,phone_pwd,email,email_pwd,cookie)
     uid,login_data=cm.login(cookie_refresh)
     if not uid:
         print(f'账号登录失败:{str(login_data)}')
