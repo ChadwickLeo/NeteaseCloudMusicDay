@@ -73,6 +73,8 @@ class CloudMusic:
         if data and data.get('data') and data.get('data').get('code')==200 and data.get('data').get('account') and data.get('data').get('account').get('status')==0:
             print(f'cookie登录成功')
             return ( data.get('data').get('account').get('id'), data )
+        else:
+            print(f'cookie登录失败:{str(data)}')
         return ( None, data )
 
     def refresh(self):
