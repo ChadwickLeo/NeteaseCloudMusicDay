@@ -236,7 +236,7 @@ if __name__=='__main__':
                   '德语精选':'German', 
                   '越南语精选':'Vietnamese', 
                   '泰语精选':'Thai', 
-                  '韩语精选':'Korean', 
+                  '韩语精选#K-pop@6686195797':'Korean', 
                   '[韩系小甜歌]':'Korean Sweet', 
                   '日本流行精选':'Japanese', 
                   '有声书精选':'Audible', 
