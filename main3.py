@@ -249,8 +249,8 @@ if __name__=='__main__':
          # 虚位以待 深厚磁性男声
         for src_list_keywords,dst_list_name in SYNC_LIST.items():
             src_list_id = src_list_keywords.partition("@")[2]
-            if src_list_id:  # 优先从名字中获取歌单ID
-                print('【源歌单已找到】%s' % str((src_list_id)) )
+            if src_list_id and src_list_id in user_music_list.values():  # 优先从名字中获取歌单ID
+                print('【源歌单已找到】%s' % str((src_list_id,list(user_music_list.keys())[list(user_music_list.values()).index(src_list_id)])) )
             elif uid:   # 其次获取歌单列表并通过关键字匹配
                 for list_name in user_music_list:
                     for src_list_keyword in src_list_keywords.partition("@")[0].strip("# ").split("#"):
