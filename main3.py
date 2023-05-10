@@ -225,7 +225,7 @@ if __name__=='__main__':
                   '[大自然纯音]':'Nature', 
                   '[古典歌剧典藏]':'Opera', 
                   '[开启学霸模式]':'Western Classical', 
-                  '[放刺一周电音]':'Electronic', 
+                  '[放刺一周电音]@2946898175':'Electronic', 
                   '[电音小情歌]':'Electronic Love', 
                   '[公路之歌]':'Roadtrip', 
                   '[放克复古派对]':'Funk', 
