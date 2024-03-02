@@ -3,6 +3,7 @@ import requests as r
 import time
 import config
 import codecs,os,json,urllib,sys
+from datetime import datetime as dt
 
 def mergeDictListByKey(dictList1, dictList2, key):
     intListLengthBefore = len(dictList1)
@@ -63,8 +64,17 @@ class CloudMusic:
             # if data.get('code')== 803: print(f'授权登录成功,返回cookie[{data.get('cookie')}])
             # 邮箱登录参考
             if data.get('cookie') and str(data.get('cookie')).strip():
-                self.cookie=data.get('cookie')
-                print(f"OUTVAR_COOKIE:{data.get('cookie')}")
+                try:
+                    ( date_str_old, date_str_new ) = ( cookie1.partition("MUSIC_U=")[2].partition("Expires=")[2].partition(";")[0], cookie2.partition("MUSIC_U=")[2].partition("Expires=")[2].partition(";")[0] )
+                    ( date_old, date_new ) = ( dt.strptime(date_str_old, "%a, %d %b %Y %H:%M:%S %Z"), dt.strptime(date_str_new, "%a, %d %b %Y %H:%M:%S %Z") )
+                    if date_old<date_new:
+                        print(f'cookie应该更新[{date_str_old} -> {date_str_new}]')
+                        self.cookie=data.get('cookie')
+                        print(f"OUTVAR_COOKIE:{data.get('cookie')}")
+                    else:
+                        print(f'cookie无需更新[{date_str_old} -> {date_str_new}]')
+                except ValueError:
+                    print(f'cookie更新异常[{date_str_old} -> {date_str_new}]')
         return ( uid,login_data )
 
     def loginStatus(self):
